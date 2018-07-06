@@ -1,0 +1,5 @@
+swiftmailer:        #app: cache.adapter.apcu
+        transport: gmail
+        host:  smtp.gmail.com
+        username: ruben.cozzolino@gmail.com
+        password: 1Qwer432
