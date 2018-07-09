@@ -25,7 +25,7 @@ class FilmDAO
         $this->em = $entityManager;
     }
 
-    public function createFilm(Film $film){
+    public function createFilm(Film $film):Film{
 
         $this->em ->persist($film);
         $this->em->flush();

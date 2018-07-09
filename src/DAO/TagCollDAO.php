@@ -10,7 +10,7 @@ namespace App\DAO;
 
 
 use App\Entity\TagColl;
-
+use Doctrine\ORM\EntityManagerInterface;
 class TagCollDAO
 {
     /**

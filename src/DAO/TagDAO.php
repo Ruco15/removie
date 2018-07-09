@@ -8,7 +8,7 @@
 
 namespace App\DAO;
 use App\Entity\Tag;
-
+use Doctrine\ORM\EntityManagerInterface;
 class TagDAO
 {
     /**

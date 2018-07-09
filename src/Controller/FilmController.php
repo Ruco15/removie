@@ -9,6 +9,9 @@
 namespace App\Controller;
 
 
+use App\Entity\FilmGenere;
+use App\Entity\Generi;
+use App\ExceptionPersonalizzate\RemovieException;
 use App\Modal\Errore;
 use App\Modal\FilmModal;
 use App\Controller\AbstractController;
@@ -36,13 +39,10 @@ class FilmController extends AbstractController
                 try {
                     $this->getEm()->getConnection()->beginTransaction();
                     $film = $this->getFilmDao()->createFilm($filmModal->getFilm());
-                    foreach ($filmModal->getGenereId() as $gen){
-                   //     $this->getGenereDAO()->get
-
-                    }
+                    $this->addGenereFilm($filmModal->getGenereId(), $film);
 
                     $this->getEm()->getConnection()->commit();
-                } catch (ConstraintViolationException | Exception $e) {
+                } catch (ConstraintViolationException |RemovieException| Exception $e) {
                     $error = new Errore();
                     $this->getEm()->getConnection()->rollback();
                     $error->setDescrizione($e->getMessage());
@@ -56,15 +56,14 @@ class FilmController extends AbstractController
             }
 
 
-
-        }else{
+        } else {
             $error = $filmModal;
         }
 
-        if(!empty($error)){
+        if (!empty($error)) {
             $jsonOut = JsonUtil::serializeJson($error);
-        }else{
-            $jsonOut = JsonUtil::serializeJson($film);
+        } else {
+            $jsonOut = JsonUtil::serializeJson($filmModal);
         }
 
         $response = new Response(
@@ -89,4 +88,21 @@ class FilmController extends AbstractController
     {
 
     }
+
+    private function addGenereFilm(array $genere, $film)
+    {
+        if (count($genere) > 1) {
+            $genereFilm = new FilmGenere();
+            $genereFilm->setIdFilm($film);
+            foreach ($genere as $gen) {
+                $this->getLog()->info("Sono entrato nel forEach".$gen);
+                $genereT = $this->getGenereDAO()->getGenereById($gen);
+
+                $genereFilm->setIdGenere($genereT);
+                $this->getFilmGenereDao()->associaGenereAlFilm($genereFilm);
+                $genereFilm->setId(2);
+            }
+        }
+    }
+
 }

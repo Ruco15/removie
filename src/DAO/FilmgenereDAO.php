@@ -10,6 +10,8 @@ namespace App\DAO;
 
 
 use App\Entity\FilmGenere;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class FilmgenereDAO
 {
@@ -22,10 +24,14 @@ class FilmgenereDAO
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
+
     }
 
     public function associaGenereAlFilm(FilmGenere $filmgenere){
-
+    $this->em->persist($filmgenere);
+    $this->em->flush();
+    $this->em->refresh($filmgenere);
+    return $filmgenere;
     }
 
     public function filmEGenereGiaAssociati(FilmGenere $filmgenere){

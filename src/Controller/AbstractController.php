@@ -16,11 +16,16 @@ abstract class  AbstractController extends Controller
 {
 
 
+    public function getLog(){
+
+        return $this->get('logger')->getLogger();
+    }
     /**
      * @return mixed
      */
     public function getEm()
     {
+
         return $this->getDoctrine()->getManager();
     }
 
@@ -59,7 +64,7 @@ abstract class  AbstractController extends Controller
     /**
      * @return mixed
      */
-    public function getFilmGenere()
+    public function getFilmGenereDao()
     {
         return  $this->container->get("service.filmgeneredao");
     }
@@ -90,7 +95,7 @@ abstract class  AbstractController extends Controller
 
     public function getGenereDAO()
     {
-        return  $this->container->get('service.service.generedao');
+        return  $this->container->get('service.generedao');
     }
 
     /**

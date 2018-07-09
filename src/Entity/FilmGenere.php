@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use App\Entity\Film;
+use App\Entity\Generi;
 /**
  * FilmGenere
  *
- * @ORM\Table(name="film_genere", uniqueConstraints={@ORM\UniqueConstraint(name="id_genere_UNIQUE", columns={"id_genere"}), @ORM\UniqueConstraint(name="id_film_UNIQUE", columns={"id_film"})}, indexes={@ORM\Index(name="id_gen_idx", columns={"id_genere"}), @ORM\Index(name="id_filmgen_idx", columns={"id_film"})})
+ * @ORM\Table(name="film_genere", indexes={@ORM\Index(name="id_gen_idx", columns={"id_genere"}), @ORM\Index(name="id_filmgen_idx", columns={"id_film"})})
  * @ORM\Entity
  */
 class FilmGenere
@@ -22,7 +23,7 @@ class FilmGenere
     private $id;
 
     /**
-     * @var \Film
+     * @var Film
      *
      * @ORM\ManyToOne(targetEntity="Film")
      * @ORM\JoinColumns({
@@ -32,7 +33,7 @@ class FilmGenere
     private $idFilm;
 
     /**
-     * @var \Generi
+     * @var Generi
      *
      * @ORM\ManyToOne(targetEntity="Generi")
      * @ORM\JoinColumns({
@@ -58,33 +59,33 @@ class FilmGenere
     }
 
     /**
-     * @return \Film
+     * @return Film
      */
-    public function getIdFilm(): \Film
+    public function getIdFilm(): Film
     {
         return $this->idFilm;
     }
 
     /**
-     * @param \Film $idFilm
+     * @param Film $idFilm
      */
-    public function setIdFilm(\Film $idFilm): void
+    public function setIdFilm(Film $idFilm): void
     {
         $this->idFilm = $idFilm;
     }
 
     /**
-     * @return \Generi
+     * @return Generi
      */
-    public function getIdGenere(): \Generi
+    public function getIdGenere(): Generi
     {
         return $this->idGenere;
     }
 
     /**
-     * @param \Generi $idGenere
+     * @param Generi $idGenere
      */
-    public function setIdGenere(\Generi $idGenere): void
+    public function setIdGenere(Generi $idGenere): void
     {
         $this->idGenere = $idGenere;
     }

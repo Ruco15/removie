@@ -8,7 +8,9 @@
 
 namespace App\DAO;
 use App\Entity\Generi;
+use App\ExceptionPersonalizzate\RemovieException;
 use App\Modal\Errore;
+use App\Util\ErrorEnum;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\FilmGenere;
@@ -26,13 +28,12 @@ class GenereDAO
         $this->em = $entityManager;
     }
 
-    public function getGenereById($idGenere){
+    public function getGenereById($idGenere): Generi{
             $genere = $this->em->find(Generi::class,$idGenere);
-            if($genere== null){
-                $error = new Errore();
-                $error->setCode("1");
-                $error->setDescrizione("genere non trovato");
+            if($genere==null){
+             throw new RemovieException("Genere non trovato", ErrorEnum::OGGETTO_NON_TROVATO);
             }
+            return $genere;
     }
 
     public function filmEGenereGiaAssociati(FilmGenere $filmgenere){

@@ -8,6 +8,8 @@
 
 namespace App\DAO;
 
+use Doctrine\ORM\EntityManagerInterface;
+
 
 use App\Entity\FilmGenere;
 use App\Entity\OscarFilm;
@@ -25,11 +27,13 @@ class OscarFilmDAO
         $this->em = $entityManager;
     }
 
-    public function associaOscarAlFilm(OscarFilm $oscarFilm){
+    public function associaOscarAlFilm(OscarFilm $oscarFilm)
+    {
 
     }
 
-    public function filmEOscarGiaAssociati(OscarFilm $oscarFilm){
+    public function filmEOscarGiaAssociati(OscarFilm $oscarFilm)
+    {
 
 
     }
