@@ -40,17 +40,17 @@ services:
     service.generedao:
               class: App\DAO\GenereDAO
               arguments: [ "@doctrine.orm.entity_manager"]
-
+    service.oscardao:
+              class: App\DAO\OscarDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.tipidao:
+              class: App\DAO\TipiGenericiDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
     service.sendemail:
               class: App\Util\SendEmail
               arguments:
                           $twig: '@twig'
                           $mailer: '@mailer'
-    logger.conf:
-              class: Psr\Log\LoggerInterface
-    logger:
-              class: App\Util\LogConfiguration
-              arguments: ["@logger.conf"]
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

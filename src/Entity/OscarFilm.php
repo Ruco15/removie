@@ -59,6 +59,16 @@ class OscarFilm
     private $idTipo;
 
     /**
+     * @var \Personaggi
+     *
+     * @ORM\ManyToOne(targetEntity="Personaggi")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_personaggi", referencedColumnName="id")
+     * })
+     */
+    private $idPersonaggi;
+
+    /**
      * @return string
      */
     public function getAnno(): string
@@ -120,6 +130,22 @@ class OscarFilm
     public function setIdOscar(\Premioscar $idOscar): void
     {
         $this->idOscar = $idOscar;
+    }
+
+    /**
+     * @return \Personaggi
+     */
+    public function getIdPersonaggi(): \Personaggi
+    {
+        return $this->idPersonaggi;
+    }
+
+    /**
+     * @param \Personaggi $idPersonaggi
+     */
+    public function setIdPersonaggi(\Personaggi $idPersonaggi): void
+    {
+        $this->idPersonaggi = $idPersonaggi;
     }
 
     /**

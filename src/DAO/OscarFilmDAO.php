@@ -29,7 +29,10 @@ class OscarFilmDAO
 
     public function associaOscarAlFilm(OscarFilm $oscarFilm)
     {
-
+        $this->em->persist($oscarFilm);
+        $this->em->flush();
+        $this->em->refresh($oscarFilm);
+        return $oscarFilm;
     }
 
     public function filmEOscarGiaAssociati(OscarFilm $oscarFilm)

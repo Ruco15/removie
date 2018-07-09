@@ -16,10 +16,7 @@ abstract class  AbstractController extends Controller
 {
 
 
-    public function getLog(){
 
-        return $this->get('logger')->getLogger();
-    }
     /**
      * @return mixed
      */
@@ -42,7 +39,7 @@ abstract class  AbstractController extends Controller
      */
     public function getOscarFilmDao()
     {
-        return  $this->container->get("oscarfilmdao.service");;
+        return  $this->container->get("service.oscarfilmdao");
     }
 
     /**
@@ -98,6 +95,10 @@ abstract class  AbstractController extends Controller
         return  $this->container->get('service.generedao');
     }
 
+    public function getOscarDAO()
+    {
+        return  $this->container->get('service.oscardao');
+    }
     /**
      * @return mixed
      */
@@ -110,4 +111,7 @@ abstract class  AbstractController extends Controller
         return new Session();
     }
 
+    public function getTipiGenericiDAO(){
+        return $this->container->get('service.tipidao');
+    }
 }

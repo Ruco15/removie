@@ -7,6 +7,7 @@
  */
 
 namespace App\Modal;
+use App\Modal\OscarModal;
 use App\Entity\Film;
 use App\Entity\FilmGenere;
 use App\Entity\OscarFilm;
@@ -35,7 +36,7 @@ class FilmModal
      */
     private $tag_name =[];
     /**
-     *  @Type("array")
+     * @Type("array")
      * @var array
      */
     private $oscar_id=[];
@@ -89,17 +90,17 @@ class FilmModal
     }
 
     /**
-     * @return array
+     * @return OscarModal
      */
-    public function getOscarId(): array
+    public function getOscarId(): OscarModal
     {
         return $this->oscar_id;
     }
 
     /**
-     * @param array $oscar_id
+     *
      */
-    public function setOscarId(array $oscar_id): void
+    public function setOscarId(OscarModal $oscar_id): void
     {
         $this->oscar_id = $oscar_id;
     }

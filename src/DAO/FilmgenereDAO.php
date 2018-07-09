@@ -30,7 +30,7 @@ class FilmgenereDAO
     public function associaGenereAlFilm(FilmGenere $filmgenere){
     $this->em->persist($filmgenere);
     $this->em->flush();
-    $this->em->refresh($filmgenere);
+
     return $filmgenere;
     }
 

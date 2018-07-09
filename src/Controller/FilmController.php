@@ -11,10 +11,12 @@ namespace App\Controller;
 
 use App\Entity\FilmGenere;
 use App\Entity\Generi;
+use App\Entity\OscarFilm;
 use App\ExceptionPersonalizzate\RemovieException;
 use App\Modal\Errore;
 use App\Modal\FilmModal;
 use App\Controller\AbstractController;
+use App\Modal\OscarModal;
 use Doctrine\DBAL\Exception\ConstraintViolationException;
 use Symfony\Component\HttpFoundation\Request;
 use App\Util\JsonUtil;
@@ -38,9 +40,10 @@ class FilmController extends AbstractController
             if (count($validationModal) === 0) {
                 try {
                     $this->getEm()->getConnection()->beginTransaction();
+
                     $film = $this->getFilmDao()->createFilm($filmModal->getFilm());
                     $this->addGenereFilm($filmModal->getGenereId(), $film);
-
+                    $this->addPremioOscar($filmModal->getOscarId(),$film);
                     $this->getEm()->getConnection()->commit();
                 } catch (ConstraintViolationException |RemovieException| Exception $e) {
                     $error = new Errore();
@@ -91,18 +94,39 @@ class FilmController extends AbstractController
 
     private function addGenereFilm(array $genere, $film)
     {
-        if (count($genere) > 1) {
-            $genereFilm = new FilmGenere();
-            $genereFilm->setIdFilm($film);
-            foreach ($genere as $gen) {
-                $this->getLog()->info("Sono entrato nel forEach".$gen);
-                $genereT = $this->getGenereDAO()->getGenereById($gen);
+        if (count($genere) > 0) {
 
+            foreach ($genere as $gen) {
+                $genereFilm = new FilmGenere();
+                $genereFilm->setIdFilm($film);
+                $genereT = $this->getGenereDAO()->getGenereById($gen);
                 $genereFilm->setIdGenere($genereT);
                 $this->getFilmGenereDao()->associaGenereAlFilm($genereFilm);
-                $genereFilm->setId(2);
+
             }
+        }else{
+            throw new RemovieException("Inserire almeno un genere", ErrorEnum::OGGETTO_NON_TROVATO);
         }
     }
+
+  private function addPremioOscar($oscar,$film){
+      if (count($oscar) > 0 and $oscar instanceof OscarModal) {
+
+          foreach ($oscar as $osc) {
+             $oscarFilm = new OscarFilm();
+             $oscarFilm->setIdFilm($film);
+             $oscar = $this->getOscarDAO()->getOscarById($osc->getIdOscar());
+             $tipo = $this->getTipiGenericiDAO()->getTipoGenericoByName($osc->getIdTipo());
+             $oscarFilm ->setIdTipo($tipo);
+             $oscarFilm->setAnno($osc->getAnno());
+             $oscarFilm->setIdOscar($oscar);
+             $this->getOscarFilmDao() ->associaOscarAlFilm($oscarFilm);
+             }
+      } else{
+          throw new RemovieException("Errore di insance", 1);
+      }
+
+  }
+
 
 }
