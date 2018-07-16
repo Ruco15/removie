@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\ExceptionPersonalizzate\RemovieException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -47,7 +48,7 @@ abstract class  AbstractController extends Controller
      */
     public function getTagDao()
     {
-        return  $this->container->get("tagdao.service");;
+        return  $this->container->get("service.tagdao");
     }
 
     /**
@@ -55,7 +56,7 @@ abstract class  AbstractController extends Controller
      */
     public function getTagCollDao()
     {
-        return  $this->container->get("tagcolldao.service");;
+        return  $this->container->get("service.tagcolldao");
     }
 
     /**
@@ -113,5 +114,12 @@ abstract class  AbstractController extends Controller
 
     public function getTipiGenericiDAO(){
         return $this->container->get('service.tipidao');
+    }
+
+    protected function validator($object,$nameClass){
+        $validator = $this->getValidator()->validate($object);
+        if(count($validator) !==0){
+            throw new RemovieException("Inserisci tutte le informazioni inertenti".$nameClass,1);
+        }
     }
 }

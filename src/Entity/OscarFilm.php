@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * OscarFilm
  *
- * @ORM\Table(name="oscar_film", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="id_film_UNIQUE", columns={"id_film"}), @ORM\UniqueConstraint(name="id_oscar_UNIQUE", columns={"id_oscar"})}, indexes={@ORM\Index(name="id_pros_idx", columns={"id_oscar"}), @ORM\Index(name="id_tipos_idx", columns={"id_tipo"}), @ORM\Index(name="id_filmos_idx", columns={"id_film"})})
+ * @ORM\Table(name="oscar_film", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})},
+ *            indexes={@ORM\Index(name="id_pros_idx", columns={"id_oscar"}), @ORM\Index(name="id_tipos_idx", columns={"id_tipo"}),
+ *                     @ORM\Index(name="id_filmos_idx", columns={"id_film"}), @ORM\Index(name="id_peros_idx", columns={"id_personaggio"})})
  * @ORM\Entity
  */
 class OscarFilm
@@ -29,7 +31,7 @@ class OscarFilm
     private $anno;
 
     /**
-     * @var \Film
+     * @var Film
      *
      * @ORM\ManyToOne(targetEntity="Film")
      * @ORM\JoinColumns({
@@ -39,7 +41,7 @@ class OscarFilm
     private $idFilm;
 
     /**
-     * @var \Premioscar
+     * @var Premioscar
      *
      * @ORM\ManyToOne(targetEntity="Premioscar")
      * @ORM\JoinColumns({
@@ -49,7 +51,7 @@ class OscarFilm
     private $idOscar;
 
     /**
-     * @var \Tipigenerici
+     * @var Tipigenerici
      *
      * @ORM\ManyToOne(targetEntity="Tipigenerici")
      * @ORM\JoinColumns({
@@ -59,11 +61,11 @@ class OscarFilm
     private $idTipo;
 
     /**
-     * @var \Personaggi
+     * @var Personaggi
      *
      * @ORM\ManyToOne(targetEntity="Personaggi")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_personaggi", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_personaggio", referencedColumnName="id")
      * })
      */
     private $idPersonaggi;
@@ -101,65 +103,65 @@ class OscarFilm
     }
 
     /**
-     * @return \Film
+     * @return Film
      */
-    public function getIdFilm(): \Film
+    public function getIdFilm(): Film
     {
         return $this->idFilm;
     }
 
     /**
-     * @param \Film $idFilm
+     * @param Film $idFilm
      */
-    public function setIdFilm(\Film $idFilm): void
+    public function setIdFilm(Film $idFilm): void
     {
         $this->idFilm = $idFilm;
     }
 
     /**
-     * @return \Premioscar
+     * @return Premioscar
      */
-    public function getIdOscar(): \Premioscar
+    public function getIdOscar(): Premioscar
     {
         return $this->idOscar;
     }
 
     /**
-     * @param \Premioscar $idOscar
+     * @param Premioscar $idOscar
      */
-    public function setIdOscar(\Premioscar $idOscar): void
+    public function setIdOscar(Premioscar $idOscar): void
     {
         $this->idOscar = $idOscar;
     }
 
     /**
-     * @return \Personaggi
+     * @return Personaggi
      */
-    public function getIdPersonaggi(): \Personaggi
+    public function getIdPersonaggi(): Personaggi
     {
         return $this->idPersonaggi;
     }
 
     /**
-     * @param \Personaggi $idPersonaggi
+     * @param Personaggi $idPersonaggi
      */
-    public function setIdPersonaggi(\Personaggi $idPersonaggi): void
+    public function setIdPersonaggi(Personaggi $idPersonaggi): void
     {
         $this->idPersonaggi = $idPersonaggi;
     }
 
     /**
-     * @return \Tipigenerici
+     * @return Tipigenerici
      */
-    public function getIdTipo(): \Tipigenerici
+    public function getIdTipo(): Tipigenerici
     {
         return $this->idTipo;
     }
 
     /**
-     * @param \Tipigenerici $idTipo
+     * @param Tipigenerici $idTipo
      */
-    public function setIdTipo(\Tipigenerici $idTipo): void
+    public function setIdTipo(Tipigenerici $idTipo): void
     {
         $this->idTipo = $idTipo;
     }

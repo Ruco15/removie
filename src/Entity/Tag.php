@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tag
  *
- * @ORM\Table(name="tag", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="codice_UNIQUE", columns={"codice"})})
+ * @ORM\Table(name="tag", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="nome_UNIQUE", columns={"nome"})})
  * @ORM\Entity
  */
 class Tag
@@ -29,11 +29,7 @@ class Tag
     private $nome;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="codice", type="string", length=70, nullable=false)
-     */
-    private $codice;
+
 
     /**
      * @return int
@@ -65,22 +61,6 @@ class Tag
     public function setNome(string $nome): void
     {
         $this->nome = $nome;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCodice(): string
-    {
-        return $this->codice;
-    }
-
-    /**
-     * @param string $codice
-     */
-    public function setCodice(string $codice): void
-    {
-        $this->codice = $codice;
     }
 
 

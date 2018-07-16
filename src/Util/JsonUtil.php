@@ -9,6 +9,8 @@
 namespace App\Util;
 use App\Entity\AbstractEntity;
 use App\Entity\Utenti;
+use App\ExceptionPersonalizzate\RemovieException;
+use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\Exception\UnsupportedFormatException;
 
 use App\Modal\Errore;
@@ -25,20 +27,10 @@ class JsonUtil
 
            $serializer = SerializerBuilder::create()->build();
            $object = $serializer->deserialize($request, $entity, 'json');
-        } catch (UnsupportedFormatException  $e){
-            $errore = new Errore();
-            $errore->setCode($e->getCode());
-            $errore->setDescrizione($e->getMessage());
-            return $errore;
-       } catch(ValidationFailedException $e1){
-           $errore = new Errore();
-           $errore->setCode($e1->getCode());
-           $errore->setDescrizione($e1->getMessage());
-            return e1;
-
+        } catch (ValidationFailedException | UnsupportedFormatException  $e){
+           throw new RemovieException($e->getMessage(),$e->getCode());
        }
-
-        return $object;
+       return $object;
 
     }
 
@@ -46,16 +38,8 @@ class JsonUtil
         $serializer = SerializerBuilder::create()->build();
         try{
             $jsonContent =  $serializer->serialize($entity, 'json');
-        }catch (UnsupportedFormatException $e){
-            $errore = new Errore();
-            $errore->setCode($e->getCode());
-            $errore->setDescrizione($e->getMessage());
-            return $errore;
-        } catch (Exception $e1){
-            $errore = new Errore();
-            $errore->setCode($e1->getCode());
-            $errore->setDescrizione($e1->getMessage());
-            return $errore;
+        }catch (UnsupportedFormatException | Exception $e ){
+            throw new RemovieException($e->getMessage(),$e->getCode());
         }
 
         return $jsonContent;

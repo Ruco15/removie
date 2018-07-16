@@ -13,6 +13,7 @@ use App\Entity\FilmGenere;
 use App\Entity\OscarFilm;
 use App\Entity\Tag;
 use App\Entity\TagColl;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,7 +21,7 @@ class FilmModal
 {
     /**
      * @Type("App\Entity\Film")
-     * @var \Film
+     * @var Film
      * @Assert\NotBlank()
      */
     private $film;
@@ -36,10 +37,10 @@ class FilmModal
      */
     private $tag_name =[];
     /**
-     * @Type("array")
+     * @Type("array<App\Modal\OscarModal>")
      * @var array
      */
-    private $oscar_id=[];
+    private $oscar_id = array();
 
     /**
      * @return Film
@@ -90,17 +91,17 @@ class FilmModal
     }
 
     /**
-     * @return OscarModal
+    * @return array
      */
-    public function getOscarId(): OscarModal
+    public function getOscarId()
     {
         return $this->oscar_id;
     }
 
     /**
-     *
+     * @param array $oscar_id
      */
-    public function setOscarId(OscarModal $oscar_id): void
+    public function setOscarId($oscar_id): void
     {
         $this->oscar_id = $oscar_id;
     }

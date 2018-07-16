@@ -19,7 +19,7 @@ class Film
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @Assert\Blank()
+     *
      */
     private $id;
 
@@ -50,10 +50,10 @@ class Film
     /**
      * @var bool
      *@Type ("bool")
-     * @Assert\NotBlank()
-     * @ORM\Column(name="isNew", type="boolean", nullable=false)
+
+     * @ORM\Column(name="isNew", type="boolean", nullable=true)
      */
-    private $isnew;
+    private $isnew = false;
 
     /**
      * @var int|null
@@ -63,7 +63,8 @@ class Film
     private $puntate;
 
     /**
-     * @var \Tipigenerici
+     * @var Tipigenerici
+     *
      *@Type ("App\Entity\Tipigenerici")
      * @ORM\ManyToOne(targetEntity="Tipigenerici")
      * @ORM\JoinColumns({
@@ -169,17 +170,17 @@ class Film
     }
 
     /**
-     * @return \Tipigenerici
+     * @return Tipigenerici
      */
-    public function getIdTipo(): \Tipigenerici
+    public function getIdTipo(): Tipigenerici
     {
         return $this->idTipo;
     }
 
     /**
-     * @param \Tipigenerici $idTipo
+     * @param Tipigenerici $idTipo
      */
-    public function setIdTipo(\Tipigenerici $idTipo): void
+    public function setIdTipo(Tipigenerici $idTipo): void
     {
         $this->idTipo = $idTipo;
     }

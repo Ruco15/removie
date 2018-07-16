@@ -17,13 +17,13 @@ class OscarModal
      * @type("int")
      * @Assert\NotBlank()
      */
-private $idOscar;
+private $idoscar;
     /**
      * @var string
      * @type("string")
      * @Assert\NotBlank()
      */
-private $idTipo;
+private $idtipo;
     /**
      * @var string
      * @type("string")
@@ -51,33 +51,33 @@ private $anno;
     /**
      * @return mixed
      */
-    public function getIdOscar()
+    public function getIdoscar()
     {
-        return $this->idOscar;
+        return $this->idoscar;
     }
 
     /**
-     * @param mixed $idOscar
+     * @param mixed $idoscar
      */
-    public function setIdOscar($idOscar): void
+    public function setIdoscar($idoscar): void
     {
-        $this->idOscar = $idOscar;
+        $this->idoscar = $idoscar;
     }
 
     /**
      * @return mixed
      */
-    public function getIdTipo()
+    public function getIdtipo()
     {
-        return $this->idTipo;
+        return $this->idtipo;
     }
 
     /**
-     * @param mixed $idTipo
+     * @param mixed $idtipo
      */
-    public function setIdTipo($idTipo): void
+    public function setIdtipo($idtipo): void
     {
-        $this->idTipo = $idTipo;
+        $this->idtipo = $idtipo;
     }
 
 

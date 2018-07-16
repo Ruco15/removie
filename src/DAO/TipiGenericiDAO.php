@@ -34,4 +34,12 @@ class TipiGenericiDAO
             }
             return $tipo[0];
     }
+
+    public function getTipoGenericoById($id):Tipigenerici{
+       $tipo = $this->em->find(Tipigenerici::class,$id);
+        if($tipo == null){
+            throw new RemovieException("Tipo Generico non trovato", ErrorEnum::OGGETTO_NON_TROVATO);
+        }
+        return $tipo;
+    }
 }
