@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * Anagrafica
  *
- * @ORM\Table(name="anagrafica", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), indexes={@ORM\Index(name="id_citta_idx", columns={"id_citta"})})
+ * @ORM\Table(name="anagrafica", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="id_citta_idx", columns={"id_citta"})})
  * @ORM\Entity
  */
 class Anagrafica
@@ -16,7 +18,7 @@ class Anagrafica
     /**
      * @var int
      * @Assert\Blank()
-     *@Type("int")
+     * @Type("int")
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -26,7 +28,7 @@ class Anagrafica
     /**
      * @Assert\NotBlank()
      * @var string
-     *@Type("string")
+     * @Type("string")
      * @ORM\Column(name="Nome", type="string", length=70, nullable=false)
      */
     private $nome;
@@ -34,7 +36,7 @@ class Anagrafica
     /**
      * @Assert\NotBlank()
      * @var string
-     *@Type("string")
+     * @Type("string")
      * @ORM\Column(name="Cognome", type="string", length=150, nullable=false)
      */
     private $cognome;
@@ -42,7 +44,7 @@ class Anagrafica
     /**
      * @Assert\NotBlank()
      * @var string|null
-     *@Type("string")
+     * @Type("string")
      * @ORM\Column(name="Datadinascita", type="string", length=25, nullable=false)
      */
     private $datadinascita;
@@ -50,7 +52,7 @@ class Anagrafica
     /**
      * @Assert\NotBlank()
      * @var string
-     *@Type("string")
+     * @Type("string")
      * @ORM\Column(name="Indirizzo", type="string", length=300, nullable=false)
      */
     private $indirizzo;
@@ -58,7 +60,7 @@ class Anagrafica
     /**
      * @Assert\NotBlank()
      * @var string
-     *@Type("string")
+     * @Type("string")
      * @ORM\Column(name="Cellulare", type="string", length=45, nullable=false)
      */
     private $cellulare;
@@ -66,7 +68,7 @@ class Anagrafica
     /**
      *
      * @var \Cities
-     *@Type("App\Entity\Cities")
+     * @Type("App\Entity\Cities")
      * @ORM\ManyToOne(targetEntity="Cities")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_citta", referencedColumnName="id")

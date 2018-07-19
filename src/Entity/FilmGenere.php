@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Entity;
-
+use JMS\Serializer\Annotation as JMS;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Film;
 use App\Entity\Generi;
 /**
  * FilmGenere
  *
- * @ORM\Table(name="film_genere", indexes={@ORM\Index(name="id_gen_idx", columns={"id_genere"}), @ORM\Index(name="id_filmgen_idx", columns={"id_film"})})
+ * @ORM\Table(name="film_genere", uniqueConstraints={@ORM\UniqueConstraint(name="id_genere_UNIQUE", columns={"id_genere","id_film"})}, indexes={@ORM\Index(name="id_gen_idx", columns={"id_genere"}), @ORM\Index(name="id_filmgen_idx", columns={"id_film"})})
  * @ORM\Entity
  */
 class FilmGenere
@@ -24,7 +24,7 @@ class FilmGenere
 
     /**
      * @var Film
-     *
+     * @JMS\Exclude()
      * @ORM\ManyToOne(targetEntity="Film")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_film", referencedColumnName="id")

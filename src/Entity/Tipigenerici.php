@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\Type;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Tipigenerici
  *
@@ -14,7 +16,7 @@ class Tipigenerici
 {
     /**
      * @var int
-     *
+     * @Type("int")
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -23,24 +25,26 @@ class Tipigenerici
 
     /**
      * @var string
-     *
+     *@Type("string")
      * @ORM\Column(name="nome", type="string", length=60, nullable=false)
      */
     private $nome;
 
     /**
      * @var string|null
-     *
+     * @Type("string")
      * @ORM\Column(name="descrizione", type="string", length=200, nullable=true)
      */
     private $descrizione;
 
     /**
      * @var int|null
-     *
+     * @Type("App\Entity\Tipigenerici")
      * @ORM\Column(name="id_tipo", type="integer", nullable=true)
      */
     private $idTipo;
+
+
 
     /**
      * @return int

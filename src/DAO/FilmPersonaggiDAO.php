@@ -2,17 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Ruben
- * Date: 04/07/2018
- * Time: 12:26
+ * Date: 17/07/2018
+ * Time: 14:46
  */
 
 namespace App\DAO;
-
-
-use App\Entity\TagColl;
+use App\Entity\FilmPersonaggi;
 use Doctrine\ORM\EntityManagerInterface;
-class TagCollDAO
+
+class FilmPersonaggiDAO
 {
+
     /**
      *
      * @var EntityManagerInterface
@@ -22,12 +22,15 @@ class TagCollDAO
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
+
     }
 
+    public function associaPersonaggioAFilm(FilmPersonaggi $filmPersonaggi){
+        $this->em->persist($filmPersonaggi);
+        $this->em->flush();
+        $this->em->refresh($filmPersonaggi);
+        return $filmPersonaggi;
 
-    public function associaTag($coll){
-            $this->em->persist($coll);
-            $this->em->flush();
-            return $coll;
     }
+
 }

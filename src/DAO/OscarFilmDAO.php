@@ -27,7 +27,7 @@ class OscarFilmDAO
         $this->em = $entityManager;
     }
 
-    public function associaOscarAlFilm(OscarFilm $oscarFilm)
+    public function associaOscarAlFilm(OscarFilm $oscarFilm):OscarFilm
     {
         $this->em->persist($oscarFilm);
         $this->em->flush();

@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -66,12 +68,64 @@ class Film
      * @var Tipigenerici
      *
      *@Type ("App\Entity\Tipigenerici")
-     * @ORM\ManyToOne(targetEntity="Tipigenerici")
+     * @ORM\ManyToOne(targetEntity="Tipigenerici", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_tipo", referencedColumnName="id")
      * })
      */
     private $idTipo;
+/**
+ *
+ * @var ArrayCollection
+ * @Type("ArrayCollection<App\Entity\FilmPersonaggi>")
+ * @ORM\OneToMany(targetEntity="App\Entity\FilmPersonaggi", mappedBy="idFilm", cascade={"persist"})
+     */
+    private $filmPersonaggio;
+
+    /**
+     * @var Produttori
+     * @Type("App\Entity\Produttori")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produttori", inversedBy="films")
+     * @ORM\JoinColumn(name="id_produttore", referencedColumnName="id")
+     */
+    private $produttore;
+
+    /**
+     * @return Produttori
+     */
+    public function getProduttore(): Produttori
+    {
+        return $this->produttore;
+    }
+
+    /**
+     * @param Produttori $produttore
+     */
+    public function setProduttore(Produttori $produttore): void
+    {
+        $this->produttore = $produttore;
+    }
+
+
+
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getFilmPersonaggio()
+    {
+
+        return $this->filmPersonaggio;
+    }
+
+    /**
+     * @param ArrayCollection $filmPersonaggio
+     */
+    public function setFilmPersonaggio(ArrayCollection $filmPersonaggio): void
+    {
+        $this->filmPersonaggio = $filmPersonaggio;
+    }
+
 
     /**
      * @return int

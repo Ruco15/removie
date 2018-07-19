@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation as JMS;
 /**
  * OscarFilm
  *
- * @ORM\Table(name="oscar_film", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})},
+ * @ORM\Table(name="oscar_film", uniqueConstraints={@ORM\UniqueConstraint(name="id_film_UNIQUE", columns={"id_film","id_oscar"})},
  *            indexes={@ORM\Index(name="id_pros_idx", columns={"id_oscar"}), @ORM\Index(name="id_tipos_idx", columns={"id_tipo"}),
  *                     @ORM\Index(name="id_filmos_idx", columns={"id_film"}), @ORM\Index(name="id_peros_idx", columns={"id_personaggio"})})
  * @ORM\Entity
@@ -32,7 +32,7 @@ class OscarFilm
 
     /**
      * @var Film
-     *
+     * @JMS\Exclude()
      * @ORM\ManyToOne(targetEntity="Film")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_film", referencedColumnName="id")

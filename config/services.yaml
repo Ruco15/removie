@@ -46,6 +46,24 @@ services:
     service.tipidao:
               class: App\DAO\TipiGenericiDAO
               arguments: [ "@doctrine.orm.entity_manager"]
+    service.personaggidao:
+              class: App\DAO\PersonaggiDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.filmpersonaggidao:
+              class: App\DAO\FilmPersonaggiDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.lavoropersonaggidao:
+              class: App\DAO\LavoropersonaggiDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.lavoropersonaggipersonaggidao:
+              class: App\DAO\LavoropersonaggiPersonagiDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.produttoridao:
+              class: App\DAO\ProduttoriDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
+    service.filmproduttoredao:
+              class: App\DAO\FilmProduttoreDAO
+              arguments: [ "@doctrine.orm.entity_manager"]
     service.sendemail:
               class: App\Util\SendEmail
               arguments:

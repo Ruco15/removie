@@ -8,6 +8,7 @@
 
 namespace App\DAO;
 use App\Entity\Tag;
+use App\ExceptionPersonalizzate\RemovieException;
 use Doctrine\ORM\EntityManagerInterface;
 class TagDAO
 {
@@ -23,14 +24,17 @@ class TagDAO
     }
 
     public function createTag(Tag $tag){
-            $this->em->persist($tag);
-            $this->em>flush();
-            $this->em->refresh($tag);
+           try {
+               $this->em->persist($tag);
+               $this->em-> flush();
+           } catch (Exception $e){
+               throw new RemovieException($e->getMessage(),$e->getCode());
+           }
             return $tag;
     }
 
     public function getTagByString($name){
-        $query = $this->em->createQuery("SELECT t WHERE App\Entity\Tag t WHERE t.nome = :nome");
+        $query = $this->em->createQuery("SELECT t FROM App\Entity\Tag t WHERE t.nome = :nome");
         $query->setParameter("nome", strtolower($name));
         $tag = $query->getResult();
         if($tag === null || empty($tag)|| count($tag)===0 ){

@@ -30,7 +30,7 @@ class FilmModal
      * @Type("array")
      * @Assert\NotBlank()
      */
-    private $genere_id;
+    private $genere_id = [];
     /**
      * @Type("array")
      * @var array
@@ -67,7 +67,7 @@ class FilmModal
     }
 
     /**
-     * @param array $genere_id
+     * @param array
      */
     public function setGenereId(array $genere_id): void
     {

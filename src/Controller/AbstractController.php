@@ -116,10 +116,32 @@ abstract class  AbstractController extends Controller
         return $this->container->get('service.tipidao');
     }
 
+    public function getPersonaggiDAO(){
+        return $this->container->get("service.personaggidao");
+    }
+
+    public function getFilmPersonaggiDAO(){
+        return $this->container->get("service.filmpersonaggidao");
+    }
+
+    public function getLavoropersonaggiDAO(){
+        return $this->container->get("service.lavoropersonaggidao");
+    }
+
+    public function getLavoropersonaggiPersonaggiDAO(){
+        return $this->container->get("service.lavoropersonaggipersonaggidao");
+    }
+    public function getProduttoriDAO(){
+        return $this->container->get("service.produttoridao");
+    }
+
+    public function getFilmProduttoreDAO(){
+        return $this->container->get("service.filmproduttoredao");
+    }
     protected function validator($object,$nameClass){
         $validator = $this->getValidator()->validate($object);
         if(count($validator) !==0){
-            throw new RemovieException("Inserisci tutte le informazioni inertenti".$nameClass,1);
+            throw new RemovieException("Inserisci tutte le informazioni inertenti" .$nameClass,1);
         }
     }
 }

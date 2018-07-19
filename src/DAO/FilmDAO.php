@@ -10,7 +10,10 @@ namespace App\DAO;
 
 
 use App\Entity\Film;
+use App\ExceptionPersonalizzate\RemovieException;
+use App\Util\ErrorEnum;
 use Doctrine\ORM\EntityManagerInterface;
+use function PhpParser\filesInDir;
 
 class FilmDAO
 {
@@ -33,5 +36,18 @@ class FilmDAO
         return $film;
     }
 
+    public function getFilmById($id){
+        $film = $this->em->find(Film::class,$id);
+        if($film === null){
+            throw new RemovieException("Film non trovato", ErrorEnum::OGGETTO_NON_TROVATO);
+        }
+        return $film;
+    }
 
+    public function updateFilm($film){
+        $this->em->merge($film);
+        $this->em->flush();
+        $this->em->refresh($film);
+        return $film;
+    }
 }
